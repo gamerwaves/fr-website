@@ -59,9 +59,9 @@
         "it's 100% free! if you qualify, we'll pay for all your prizes + shipping (except customs fees)!"
     },
     {
-      question: 'what counts as "collaberative?"',
+      question: 'what counts as "collaborative?"',
       answer:
-        "your app should be collaborative! it should include one collaberative/multiplayer component. this could be anything from a shared drawing board to a multiplayer game!"
+        "your app should be collaborative! it should include one collaborative/multiplayer component. this could be anything from a shared drawing board to a multiplayer game!"
     },
     {
       question: 'what can i make?',
