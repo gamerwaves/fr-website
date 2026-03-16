@@ -1,0 +1,416 @@
+@import 'tailwindcss';
+
+html {
+	scroll-behavior: smooth;
+}
+
+* {
+	cursor: none !important;
+}
+
+* {
+	position: relative;
+	z-index: 2;
+}
+
+html,
+body {
+	z-index: auto;
+}
+
+.link-modal-overlay {
+	position: fixed !important;
+	z-index: 9998 !important;
+}
+
+:global(html, body) {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+
+:global(body) {
+	font-family: Georgia, 'Times New Roman', serif;
+}
+
+.page {
+	position: relative;
+	min-height: 100vh;
+	overflow: hidden;
+	background: #fff;
+}
+
+.bg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.stroke {
+	fill: none;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	filter: url(#roughen);
+}
+
+.draw {
+	stroke-dasharray: 1200;
+	stroke-dashoffset: 1200;
+	animation: drawLine 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero {
+	position: relative;
+	z-index: 3;
+	min-height: 100vh;
+	display: grid;
+	place-content: center;
+	justify-items: center;
+	text-align: center;
+	transform: translateY(-1.5vh);
+}
+
+.faq {
+	position: relative;
+	z-index: 3;
+	padding: 0 clamp(1.25rem, 5vw, 4rem) 7rem;
+	background: #fff;
+}
+
+.faq-header {
+	max-width: 72rem;
+	margin: 0 auto 2rem;
+}
+
+.faq-kicker {
+	margin: 0 0 0.4rem;
+	font-size: 0.95rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: rgba(0, 0, 0, 0.45);
+	animation: none;
+}
+
+.faq h2 {
+	margin: 0;
+	font-size: clamp(3.4rem, 8vw, 5.5rem);
+	line-height: 0.95;
+	letter-spacing: -0.05em;
+}
+
+.faq-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1.25rem;
+	max-width: 72rem;
+	margin: 0 auto;
+}
+
+.faq-card {
+	padding: 1.6rem 1.45rem 1.55rem;
+	border: 3px solid rgba(0, 0, 0, 0.82);
+	border-radius: 1.75rem;
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+	backdrop-filter: blur(10px);
+	transition:
+		transform 180ms ease,
+		border-color 180ms ease;
+}
+
+.faq-card:hover {
+	transform: translateY(-4px) rotate(-0.25deg);
+	border-style: dotted;
+	border-color: #111;
+}
+
+.faq-card:nth-child(2n) {
+	transform: rotate(0.35deg);
+}
+
+.faq-card:nth-child(2n):hover {
+	transform: translateY(-4px) rotate(0.1deg);
+}
+
+.faq-card h3 {
+	margin: 0 0 1rem;
+	font-size: clamp(1.4rem, 2.1vw, 1.95rem);
+	line-height: 1.05;
+	letter-spacing: -0.04em;
+	color: #111;
+}
+
+.faq-card p {
+	margin: 0;
+	font-size: clamp(1rem, 1.45vw, 1.18rem);
+	line-height: 1.7;
+	color: rgba(0, 0, 0, 0.76);
+	animation: none;
+}
+
+.faq-card-wide {
+	grid-column: 1 / -1;
+	background: rgba(255, 255, 255, 0.9);
+}
+
+.faq-card a {
+	color: inherit;
+	text-decoration-thickness: 0.12em;
+	text-underline-offset: 0.14em;
+}
+
+h1 {
+	margin: 0;
+	font-size: clamp(5rem, 8vw, 7.5rem);
+	line-height: 1;
+	font-weight: 700;
+	letter-spacing: -0.04em;
+	color: #111;
+	animation: fadeUp 0.7s ease 0.55s both;
+}
+
+p {
+	margin: 1.25rem 0 0;
+	font-size: clamp(1rem, 1.7vw, 1.4rem);
+	color: rgba(0, 0, 0, 0.58);
+	letter-spacing: 0.01em;
+	animation: fadeUp 0.7s ease 0.72s both;
+}
+
+.cursor {
+	position: absolute;
+	z-index: 2;
+	width: clamp(90px, 9vw, 130px);
+	aspect-ratio: 140 / 160;
+	opacity: 0;
+	pointer-events: none;
+	filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.08));
+	offset-distance: 0%;
+}
+
+.cursor svg {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.arrow-container {
+	position: absolute;
+	right: clamp(1.25rem, 7vw, 6rem);
+	bottom: clamp(1.5rem, 4vw, 3.5rem);
+	z-index: 4;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.4rem;
+	max-width: 12rem;
+	text-align: center;
+}
+
+.arrow-container p {
+	font-family: 'DREAM PLANNER';
+	margin: 0;
+	font-size: 0.88rem;
+	line-height: 1.25;
+	color: black;
+	animation: none;
+}
+
+.arrow-down {
+	width: 1.9rem;
+	height: 1.9rem;
+	animation: arrowBob 1.6s ease-in-out infinite;
+	transform-origin: center;
+}
+
+@keyframes drawLine {
+	from {
+		stroke-dashoffset: 1200;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@keyframes moveAlongPath {
+	0% {
+		opacity: 0;
+		offset-distance: 0%;
+		scale: 0.96;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
+		offset-distance: 100%;
+		scale: 1;
+	}
+}
+
+@keyframes moveAlongPathReverse {
+	0% {
+		opacity: 0;
+		offset-distance: 100%;
+		scale: 0.96;
+	}
+	10% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
+		offset-distance: 0%;
+		scale: 1;
+	}
+}
+
+@keyframes fadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes arrowBob {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(10px);
+	}
+}
+
+@media (max-width: 900px) {
+	p {
+		max-width: 20rem;
+		line-height: 1.35;
+		padding: 0 1rem;
+	}
+
+	.arrow-container {
+		right: 1rem;
+		bottom: 1.25rem;
+		max-width: 9rem;
+	}
+
+	.arrow-container p {
+		color: black !important;
+		font-size: 0.76rem;
+		padding: 0;
+	}
+
+	.arrow-down {
+		width: 1.55rem;
+		height: 1.55rem;
+	}
+
+	.faq {
+		padding: 0 1rem 5rem;
+	}
+
+	.faq-grid {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	.faq-card,
+	.faq-card:nth-child(2n),
+	.faq-card:hover,
+	.faq-card:nth-child(2n):hover {
+		transform: none;
+	}
+
+	.faq-card {
+		border-radius: 1.35rem;
+		padding: 1.25rem 1.1rem 1.2rem;
+	}
+}
+
+:global(html, body) {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+
+:global(body) {
+	font-family: 'DREAM PLANNER' !important;
+}
+
+.page {
+	position: relative;
+	min-height: 100vh;
+	overflow: hidden;
+	background: #fff;
+}
+
+.bg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.stroke {
+	fill: none;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	filter: url(#roughen);
+}
+
+.draw {
+	stroke-dasharray: 1200;
+	stroke-dashoffset: 1200;
+	animation: drawLine 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero {
+	position: relative;
+	z-index: 3;
+	min-height: 100vh;
+	display: grid;
+	place-content: center;
+	justify-items: center;
+	text-align: center;
+	transform: translateY(-1.5vh);
+}
+
+h1 {
+	margin: 0;
+	font-size: clamp(5rem, 8vw, 7.5rem);
+	line-height: 1;
+	font-weight: 700;
+	letter-spacing: -0.04em;
+	color: #111;
+	animation: fadeUp 0.7s ease 0.55s both;
+}
+
+p {
+	margin: 1.25rem 0 0;
+	font-size: clamp(1rem, 1.7vw, 1.4rem);
+	color: rgba(0, 0, 0, 0.58);
+	letter-spacing: 0.01em;
+	animation: fadeUp 0.7s ease 0.72s both;
+}
+
+.rsvp-button {
+	display: inline-block;
+	margin-top: 2rem;
+}
+
+.rsvp-button:hover {
+	scale: 1.05;
+}
+
+.airtable-embed {
+	margin: 0 auto;
+}

@@ -1,0 +1,15 @@
+@font-face {
+	font-family: 'DREAM PLANNER';
+	src: url('$lib/assets/fonts/dp.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Phantom Sans 0.7';
+	src: url('$lib/assets/fonts/phantom-sans-0.7.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
